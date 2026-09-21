@@ -31,7 +31,7 @@ logging.basicConfig(
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text="Shin hunter ready sire"
+        text="Shin hunter ready sires"
     )
 #mutetime settings
 mutetime = datetime.now() + timedelta(seconds=30)
