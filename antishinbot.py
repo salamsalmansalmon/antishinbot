@@ -3,7 +3,7 @@ from typing import Final
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 
-TOKEN: Final = '8849629773:AAEcso8_zLC7PGDgGP-GBfY3g7FGjMz4Pog'
+TOKEN = os.environ["BOT_TOKEN"]
 bot_username: Final = '@antishin_bot'
 
 logging.basicConfig(
