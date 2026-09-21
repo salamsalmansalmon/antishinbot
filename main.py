@@ -20,7 +20,7 @@ logging.basicConfig(
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text="Shin hunter readys"
+        text="Shin hunter ready sire"
     )
 
 #antishin command
@@ -30,7 +30,7 @@ async def antisnipe(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if 'to your harem by sending' in message.lower():
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text='/tmute @Shinzex 5m')
+            text='/tmute@MissRose_bot @Shinzex 5m')
 
 
 if __name__ == '__main__':
