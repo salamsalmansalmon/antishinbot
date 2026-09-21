@@ -4,10 +4,12 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 import os
 
-TOKEN = os.environ["BOT_TOKEN"]
+TOKEN = os.getenv("BOT_TOKEN")
+
+if TOKEN is None:
+    raise ValueError("BOT_TOKEN belum ditemukan di environment variables")
 
 application = ApplicationBuilder().token(TOKEN).build()
-bot_username: Final = '@antishin_bot'
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
