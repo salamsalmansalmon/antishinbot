@@ -82,7 +82,7 @@ async def antisnipe(update: Update, context: ContextTypes.DEFAULT_TYPE):
 )
             await context.bot.send_message(
                 chat_id=chat_id,
-                text="@Shinzex has been muted for 1 minute"
+                text="diam kamu shinigga"
             )
 
         except BadRequest as e:
