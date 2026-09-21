@@ -8,7 +8,6 @@ from typing import Optional, List
 from datetime import datetime, timedelta
 from telegram import Message, Chat, Bot, User
 from telegram.error import BadRequest
-from telegram.ext.dispatcher import run_async
 from telegram.utils.helpers import mention_html
 
 from tg_bot.modules.helper_funcs.chat_status import bot_admin, user_admin, is_user_admin, can_restrict
