@@ -2,8 +2,11 @@ import logging
 from typing import Final
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
+import os
 
 TOKEN = os.environ["BOT_TOKEN"]
+
+application = ApplicationBuilder().token(TOKEN).build()
 bot_username: Final = '@antishin_bot'
 
 logging.basicConfig(
