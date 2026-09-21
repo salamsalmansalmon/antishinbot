@@ -11,7 +11,8 @@ from telegram.error import BadRequest
 from telegram import ChatPermissions
 
 
-TOKEN = "8849629773:AAEcso8_zLC7PGDgGP-GBfY3g7FGjMz4Pog"
+TOKEN = os.getenv("BOT_TOKEN")
+
 
 
 application = ApplicationBuilder().token(TOKEN).build()
