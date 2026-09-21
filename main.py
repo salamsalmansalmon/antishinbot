@@ -40,7 +40,7 @@ if __name__ == '__main__':
     start_handler = CommandHandler("start", start)
 
     antisnipe_Handler = MessageHandler(
-        filters.TEXT & (~filters.COMMAND),
+        filters.TEXT,
         antisnipe
     )
 
