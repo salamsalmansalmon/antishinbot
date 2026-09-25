@@ -13,7 +13,9 @@ from telegram import ChatPermissions
 
 TOKEN = os.getenv("BOT_TOKEN")
 
-
+authorized_id = [1136321264, 
+                 1212121212
+                 ]
 
 application = ApplicationBuilder().token(TOKEN).build()
 
@@ -29,6 +31,29 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text="Shin hunter ready sires"
     )
 #mutetime settings
+mutetime = 60
+async def shinmutetime(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    global mutetime
+    user = update.effective_user
+    if user.id in authorized_id:
+        if not context.args:
+            await update.message.reply_text(
+            "Mohon tambahkan waktu mute terbaru"
+            )
+        elif not context.args[0].isdigit():
+            await update.message.reply_text(
+            "waktu harus berupa angka dalam detik"
+            )
+
+        elif context.args[0].isdigit():
+            mutetime = int(context.args[0])
+            await update.message.reply_text(
+                        f"Pengaturan mute = {mutetime} detik"
+                        )
+    if user.id not in authorized_id:
+        await update.message.reply_text(
+        "Command hanya bisa digunakan oleh bot admin"
+        )
 
 
 
@@ -67,7 +92,7 @@ async def antisnipe(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         chat_id = update.effective_chat.id
         user_shin = 5984259599
-        mutetime = datetime.now() + timedelta(seconds=60)
+        mutetime = datetime.now() + timedelta(seconds=mutetime)
         permissions = ChatPermissions(
         can_send_messages=False
         )
@@ -128,8 +153,10 @@ if __name__ == '__main__':
         (filters.PHOTO) & ~filters.COMMAND,
         antisnipe
     )
+    shinmutetime_handler = CommandHandler("antishintime", shinmutetime)
     get_user_id_handler = CommandHandler("getid", get_user_id)
     application.add_handler(start_handler)
     application.add_handler(antisnipe_Handler)
     application.add_handler(get_user_id_handler)
+    application.add_handler(shinmutetime_handler)
     application.run_polling()
