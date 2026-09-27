@@ -31,7 +31,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text="Shin hunter ready sires"
     )
 #mutetime settings
-shintime = 60
+shintime = 5
 async def shinmutetime(update: Update, context: ContextTypes.DEFAULT_TYPE):
     global shintime
     user = update.effective_user
@@ -46,7 +46,7 @@ async def shinmutetime(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
 
         elif context.args[0].isdigit():
-            mutetime = int(context.args[0])
+            shintime = int(context.args[0])
             await update.message.reply_text(
                         f"Pengaturan mute = {mutetime} detik"
                         )
