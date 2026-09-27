@@ -31,9 +31,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text="Shin hunter ready sires"
     )
 #mutetime settings
-mutetime = 60
+shintime = 60
 async def shinmutetime(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    global mutetime
+    global shintime
     user = update.effective_user
     if user.id in authorized_id:
         if not context.args:
@@ -92,7 +92,7 @@ async def antisnipe(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         chat_id = update.effective_chat.id
         user_shin = 5984259599
-        mutetime = datetime.now() + timedelta(seconds=mutetime)
+        mutetime = datetime.now() + timedelta(seconds=shintime)
         permissions = ChatPermissions(
         can_send_messages=False
         )
@@ -107,7 +107,7 @@ async def antisnipe(update: Update, context: ContextTypes.DEFAULT_TYPE):
 )
             await context.bot.send_message(
                 chat_id=chat_id,
-                text="diam kamu shinigga"
+                text=f"shin telah di mute selama {shintime} detik"
             )
 
         except BadRequest as e:
