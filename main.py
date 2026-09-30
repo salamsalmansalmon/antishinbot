@@ -55,7 +55,37 @@ async def shinmutetime(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Command hanya bisa digunakan oleh bot admin"
         )
 
+#member collector 
+members = {}
 
+async def collect_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user = update.effective_user
+
+    if user:
+        members[user.id] = user.full_name
+
+#reg member tag
+async def tagall(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    mentions = []
+
+    for user_id, name in members.items():
+        mentions.append(
+            f'<a href="tg://user?id={user_id}">{name}</a>'
+        )
+
+    text = " ".join(mentions)
+
+    await update.message.reply_text(
+        text,
+        parse_mode="HTML"
+    )
+
+#template member tag
+async def tagmembertemplate(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await context.bot.send_message(
+        chat_id=update.effective_chat.id,
+        text="@salamsalmansalmon @Arachuna @Celll7 @IoremipsumdoIorsitamet @MyAsuna @dikadikak @noctyreID @sayaaica @raiimikoo @rakagooning @reraret19 @Slooooooooooth @aWanderers @Radius_1st @Firman_NF2PC @pinocopino"
+    )
 
 #antishin command
 trigger_bot_ids = [
@@ -146,6 +176,7 @@ async def get_user_id(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 if __name__ == '__main__':
 
     application = ApplicationBuilder().token(TOKEN).build()
+    tag_all_handler = CommandHandler("tagall", tagmembertemplate)
 
     start_handler = CommandHandler("start", start)
 
@@ -153,10 +184,16 @@ if __name__ == '__main__':
         (filters.PHOTO) & ~filters.COMMAND,
         antisnipe
     )
+    member_collector_handler = MessageHandler(
+      ~filters.COMMAND,
+      collect_members
+)
     shinmutetime_handler = CommandHandler("antishintime", shinmutetime)
     get_user_id_handler = CommandHandler("getid", get_user_id)
     application.add_handler(start_handler)
     application.add_handler(antisnipe_Handler)
     application.add_handler(get_user_id_handler)
     application.add_handler(shinmutetime_handler)
+    application.add_handler(tag_all_handler)
+    application.add_handler(member_collector_handler)
     application.run_polling()
