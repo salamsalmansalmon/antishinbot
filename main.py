@@ -68,7 +68,7 @@ async def collect_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
 tagtrigger = '@all'
 async def tagall(update: Update, context: ContextTypes.DEFAULT_TYPE):
     mentions = []
-    if update.message.text = tagtrigger:
+    if update.message.text == tagtrigger:
         for user_id, name in members.items():
             mentions.append(
                 f'<a href="tg://user?id={user_id}">{name}</a>'
