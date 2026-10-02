@@ -200,6 +200,4 @@ if __name__ == '__main__':
     application.add_handler(get_user_id_handler)
     application.add_handler(tag_all_template_handler)
     application.add_handler(tagall_Handler)
-    application.run_polling()ler)
-    application.add_handler(tagallhandler_template)
     application.run_polling()
