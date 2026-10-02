@@ -179,7 +179,7 @@ if __name__ == '__main__':
     tag_all_handler = CommandHandler("tagall", tagmembertemplate)
 
     start_handler = CommandHandler("start", start)
-
+    tagallhandler_template = CommandHandler("tagtest", tagall)
     antisnipe_Handler = MessageHandler(
         (filters.PHOTO) & ~filters.COMMAND,
         antisnipe
@@ -196,4 +196,5 @@ if __name__ == '__main__':
     application.add_handler(shinmutetime_handler)
     application.add_handler(tag_all_handler)
     application.add_handler(member_collector_handler)
+    application.add_handler(tagallhandler_template)
     application.run_polling()
