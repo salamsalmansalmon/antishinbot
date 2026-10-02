@@ -65,21 +65,21 @@ async def collect_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
         members[user.id] = user.full_name
 
 #reg member tag
+tagtrigger = '@all'
 async def tagall(update: Update, context: ContextTypes.DEFAULT_TYPE):
     mentions = []
+    if update.message.text = tagtrigger:
+        for user_id, name in members.items():
+            mentions.append(
+                f'<a href="tg://user?id={user_id}">{name}</a>'
+            )
 
-    for user_id, name in members.items():
-        mentions.append(
-            f'<a href="tg://user?id={user_id}">{name}</a>'
+        text = " ".join(mentions)
+
+        await update.message.reply_text(
+            text,
+            parse_mode="HTML"
         )
-
-    text = " ".join(mentions)
-
-    await update.message.reply_text(
-        text,
-        parse_mode="HTML"
-    )
-
 #template member tag
 async def tagmembertemplate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
@@ -176,25 +176,30 @@ async def get_user_id(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 if __name__ == '__main__':
 
     application = ApplicationBuilder().token(TOKEN).build()
-    tag_all_handler = CommandHandler("tagall", tagmembertemplate)
 
     start_handler = CommandHandler("start", start)
-    tagallhandler_template = CommandHandler("tagtest", tagall)
+
+    tag_all_template_handler = CommandHandler("tagall", tagmembertemplate)
+
     antisnipe_Handler = MessageHandler(
-        (filters.PHOTO) & ~filters.COMMAND,
+        filters.TEXT & ~filters.COMMAND,
         antisnipe
     )
-    member_collector_handler = MessageHandler(
-      ~filters.COMMAND,
-      collect_members
-)
-    shinmutetime_handler = CommandHandler("antishintime", shinmutetime)
+    tagall_Handler = MessageHandler(
+        filters.TEXT & ~filters.COMMAND,
+        tagall
+    )
+    application.add_handler = MessageHandler(
+        filters.ALL & ~filters.COMMAND,
+        collect_members
+    )
+
     get_user_id_handler = CommandHandler("getid", get_user_id)
     application.add_handler(start_handler)
     application.add_handler(antisnipe_Handler)
     application.add_handler(get_user_id_handler)
-    application.add_handler(shinmutetime_handler)
-    application.add_handler(tag_all_handler)
-    application.add_handler(member_collector_handler)
+    application.add_handler(tag_all_template_handler)
+    application.add_handler(tagall_Handler)
+    application.run_polling()ler)
     application.add_handler(tagallhandler_template)
     application.run_polling()
