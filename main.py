@@ -185,19 +185,25 @@ if __name__ == '__main__':
         filters.TEXT & ~filters.COMMAND,
         antisnipe
     )
+
     tagall_Handler = MessageHandler(
         filters.TEXT & ~filters.COMMAND,
         tagall
     )
-    application.add_handler = MessageHandler(
+
+    # Member collector
+    collect_members_handler = MessageHandler(
         filters.ALL & ~filters.COMMAND,
         collect_members
     )
 
     get_user_id_handler = CommandHandler("getid", get_user_id)
+
     application.add_handler(start_handler)
     application.add_handler(antisnipe_Handler)
     application.add_handler(get_user_id_handler)
     application.add_handler(tag_all_template_handler)
     application.add_handler(tagall_Handler)
+    application.add_handler(collect_members_handler)
+
     application.run_polling()
